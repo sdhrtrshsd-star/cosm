@@ -3,215 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>🚀 КОСМОКВЕСТ 2.0 – Драг-н-дроп, довгі перегони!</title>
+    <title>🚀 КОСМОКВЕСТ 2.0 – ЕПІЧНА ВЕРСІЯ</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-        
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            background: radial-gradient(circle at 20% 30%, #0a0f2a, #030318);
-            font-family: 'Press Start 2P', monospace;
-            color: #fff;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            transform: scale(1.22);
-            transform-origin: top center;
-        }
-        
-        .container { max-width: 1720px; width: 100%; margin: 0 auto; }
-        
-        .screen {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 30px;
-            animation: fadeIn 0.4s ease;
-        }
-        
+        body { background: radial-gradient(circle at 20% 30%, #0a0f2a, #030318); font-family: 'Press Start 2P', monospace; color: #fff; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; transform: scale(1.22); transform-origin: top center; overflow: hidden; }
+        .container { max-width: 1720px; width: 100%; margin: 0 auto; position: relative; }
+        .top-bar { position: absolute; top: 15px; right: 20px; z-index: 100; background: rgba(8,12,40,0.9); border: 4px solid #0ff; border-radius: 30px; padding: 10px 20px; display: flex; gap: 25px; align-items: center; font-size: 1rem; box-shadow: 0 0 20px #0ff; }
+        .screen { display: none; flex-direction: column; align-items: center; justify-content: center; gap: 30px; animation: fadeIn 0.4s ease; }
         .screen.active { display: flex; }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        
-        .panel {
-            background: rgba(8, 12, 40, 0.88);
-            backdrop-filter: blur(4px);
-            border: 6px solid #0ff;
-            border-radius: 40px;
-            padding: 45px 40px;
-            box-shadow: 0 0 45px rgba(0, 255, 255, 0.7);
-            width: 100%;
-        }
-        
-        h1 { font-size: 3rem; text-shadow: 0 0 20px #0ff; letter-spacing: 4px; }
-        h2 { font-size: 2.1rem; text-shadow: 0 0 15px #0ff; }
-        
-        button {
-            font-family: 'Press Start 2P', monospace;
-            background: #0ff;
-            color: #010118;
-            border: none;
-            padding: 20px 45px;
-            border-radius: 60px;
-            font-size: 1.25rem;
-            cursor: pointer;
-            transition: 0.25s;
-            box-shadow: 0 0 20px #0ff;
-        }
-        
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .panel { background: rgba(8,12,40,0.88); backdrop-filter: blur(4px); border: 6px solid #0ff; border-radius: 40px; padding: 45px 40px; box-shadow: 0 0 45px rgba(0,255,255,0.7); width: 100%; }
+        button { font-family: 'Press Start 2P', monospace; background: #0ff; color: #010118; border: none; padding: 20px 45px; border-radius: 60px; font-size: 1.25rem; cursor: pointer; transition: 0.25s; box-shadow: 0 0 20px #0ff; }
         button:hover { transform: scale(1.1); background: #fff; box-shadow: 0 0 35px cyan; }
-        
         .inventory { display: flex; flex-wrap: wrap; justify-content: center; gap: 32px; margin-bottom: 45px; }
-        
-        .part {
-            width: 190px; height: 190px;
-            background: linear-gradient(145deg, #1b1f4a, #0af);
-            border: 6px solid white;
-            border-radius: 28px;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            font-size: 1.2rem;
-            cursor: grab;
-            box-shadow: 12px 12px 24px rgba(0,0,0,0.6);
-        }
-        
-        .assembly-area {
-            background: rgba(0,0,0,0.55);
-            border: 6px dashed #0ff;
-            border-radius: 50px;
-            padding: 45px 30px;
-            display: flex; flex-wrap: wrap;
-            justify-content: center; gap: 35px;
-        }
-        
-        .slot {
-            width: 210px; height: 210px;
-            background: rgba(10,30,55,0.85);
-            border: 6px solid #7f8c8d;
-            border-radius: 32px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-        
+        .part { width: 190px; height: 190px; background: linear-gradient(145deg, #1b1f4a, #0af); border: 6px solid white; border-radius: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 1.2rem; cursor: grab; box-shadow: 12px 12px 24px rgba(0,0,0,0.6); }
+        .assembly-area { background: rgba(0,0,0,0.55); border: 6px dashed #0ff; border-radius: 50px; padding: 45px 30px; display: flex; flex-wrap: wrap; justify-content: center; gap: 35px; }
+        .slot { width: 210px; height: 210px; background: rgba(10,30,55,0.85); border: 6px solid #7f8c8d; border-radius: 32px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: all 0.3s; }
         .slot.filled { border-color: #0f0; background: rgba(0,255,0,0.25); box-shadow: 0 0 25px #0f0; }
-        
-        #assembled-preview {
-            font-size: 8rem;
-            min-height: 240px;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(90deg, rgba(0,255,255,0.15), rgba(255,255,0,0.1));
-            border: 6px solid #0ff;
-            border-radius: 30px;
-            box-shadow: 0 0 35px #0ff;
-            margin: 25px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        #assembled-preview.flying::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
-            animation: flyLight 1.6s infinite linear;
-        }
-        
-        @keyframes flyLight { 0% { transform: translateX(-180%); } 100% { transform: translateX(350%); } }
-        
-        .quiz-option {
-            background: rgba(0,255,255,0.1);
-            border: 5px solid #0ff;
-            border-radius: 55px;
-            padding: 25px;
-            margin: 16px auto;
-            width: 92%;
-            max-width: 760px;
-            font-size: 1.15rem;
-            cursor: pointer;
-        }
-        
-        .race-wrapper {
-            overflow-x: auto;
-            border-radius: 35px;
-            border: 8px solid #0ff;
-            background: #030318;
-            scroll-behavior: smooth;
-            width: 100%;
-        }
-        
+        .slot.next { border-color: #ff0 !important; box-shadow: 0 0 30px #ff0; animation: pulse 1.2s infinite; }
+        @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+        #ship-preview { border: 6px solid #0ff; border-radius: 30px; background: linear-gradient(90deg, rgba(0,255,255,0.15), rgba(255,255,0,0.1)); box-shadow: 0 0 35px #0ff; }
+        .color-picker { display: flex; gap: 12px; justify-content: center; margin: 20px 0; }
+        .color-btn { width: 55px; height: 55px; border-radius: 50%; border: 5px solid #fff; cursor: pointer; box-shadow: 0 0 15px #0ff; }
+        .quiz-option { background: rgba(0,255,255,0.1); border: 5px solid #0ff; border-radius: 55px; padding: 25px; margin: 16px auto; width: 92%; max-width: 760px; font-size: 1.15rem; cursor: pointer; }
+        .race-wrapper { overflow-x: auto; border-radius: 35px; border: 8px solid #0ff; background: #030318; scroll-behavior: smooth; width: 100%; }
         canvas { display: block; background: #030318; }
-        
-        #race-rules {
-            background: #1a1a2e;
-            border: 6px solid #ffd700;
-            border-radius: 20px;
-            padding: 22px 30px;
-            font-size: 1.35rem;
-            text-align: center;
-            box-shadow: 0 0 30px #ffd700;
-            margin-bottom: 18px;
-            line-height: 1.6;
-            color: #fff;
-        }
-        
+        #race-rules { background: #1a1a2e; border: 6px solid #ffd700; border-radius: 20px; padding: 22px 30px; font-size: 1.35rem; text-align: center; box-shadow: 0 0 30px #ffd700; margin-bottom: 18px; line-height: 1.6; color: #fff; }
         .powers-row { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 20px 0; }
-        
-        .power-btn {
-            background: #f0f;
-            color: white;
-            padding: 15px 26px;
-            font-size: 0.85rem;
-            border-radius: 45px;
-            box-shadow: 0 0 18px magenta;
-        }
-        
-        .status-badge {
-            background: #01011e;
-            padding: 12px 22px;
-            border-radius: 35px;
-            font-size: 0.9rem;
-            border-left: 8px solid #0ff;
-        }
-        
-        .win-screen, .lose-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.93);
-            backdrop-filter: blur(15px);
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            gap: 35px;
-        }
-        
-        @media (max-width: 700px) {
-            body { transform: scale(1); }
-            .part, .slot { width: 145px; height: 145px; }
-        }
+        .power-btn { background: #f0f; color: white; padding: 15px 26px; font-size: 0.85rem; border-radius: 45px; box-shadow: 0 0 18px magenta; }
+        .status-badge { background: #01011e; padding: 12px 22px; border-radius: 35px; font-size: 0.9rem; border-left: 8px solid #0ff; }
+        .win-screen, .lose-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.93); backdrop-filter: blur(15px); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 2000; gap: 25px; overflow-y: auto; }
+        .tab-buttons { display: flex; background: rgba(255,255,255,0.1); border-radius: 50px; padding: 6px; margin-bottom: 20px; }
+        .tab-btn { padding: 12px 35px; border-radius: 50px; font-size: 1.1rem; transition: 0.3s; }
+        .tab-btn.active { background: #0ff; color: #010118; }
+        .achievement { display: flex; align-items: center; gap: 20px; background: rgba(255,255,255,0.08); padding: 18px; border-radius: 20px; margin: 12px 0; border: 3px solid #0ff; }
+        .achievement.locked { opacity: 0.4; border-color: #666; }
+        .shop-item { background: rgba(255,255,255,0.08); padding: 20px; border-radius: 20px; margin: 15px 0; display: flex; justify-content: space-between; align-items: center; border: 3px solid #ff0; }
+        #leaderboard-table { width: 100%; border-collapse: collapse; background: rgba(10,15,50,0.95); border: 5px solid #0ff; border-radius: 20px; overflow: hidden; }
+        #leaderboard-table th, #leaderboard-table td { padding: 14px 18px; text-align: center; border-bottom: 2px solid #0aa; }
+        #leaderboard-table th { background: #0ff; color: #010118; }
+        @media (max-width: 700px) { body { transform: scale(1); } .part, .slot { width: 145px; height: 145px; } }
     </style>
 </head>
 <body>
 <div class="container">
 
+    <div class="top-bar" id="top-bar" style="display:none;">
+        <div>👾 <span id="player-name-ui"></span></div>
+        <div>💎 <span id="credits-ui">0</span></div>
+        <div>🏆 Рівень <span id="level-ui">1</span></div>
+    </div>
+
     <!-- СТАРТ -->
     <div id="start-screen" class="screen active">
         <div class="panel" style="text-align:center;">
             <h1>🚀 КОСМОКВЕСТ 2.0</h1>
-            <p class="subtitle" style="font-size:1.1rem;">Збери свій космоліт • Склади іспит • Переможи в космічних перегонах!</p>
-            <button id="start-game-btn" style="font-size:1.6rem; padding:26px 60px; margin-top:30px;">🔥 СТАРТ КВЕСТУ</button>
+            <p style="font-size:1.1rem;">Збери • Іспит • Перегони • Ачівменти • Магазин</p>
+            <div style="margin:25px auto; max-width:520px;">
+                <input id="player-name-input" type="text" maxlength="20" placeholder="ТВІЙ НІКНЕЙМ" 
+                       style="font-family:'Press Start 2P',monospace;background:#112;color:#0ff;border:5px solid #0ff;border-radius:40px;padding:18px 30px;font-size:1.3rem;width:460px;max-width:100%;text-align:center;">
+            </div>
+            <button id="start-game-btn" style="font-size:1.6rem; padding:26px 60px;">🔥 СТАРТ КВЕСТУ</button>
+            <div style="margin-top:40px; display:flex; gap:20px; justify-content:center; flex-wrap:wrap;">
+                <button onclick="showAchievements()" style="background:#ff0;color:#010118;">🏆 АЧІВМЕНТИ</button>
+                <button onclick="showShop()" style="background:#f0f;">🛒 МАГАЗИН</button>
+            </div>
         </div>
     </div>
 
@@ -219,10 +76,16 @@
     <div id="assembly-screen" class="screen">
         <div class="panel">
             <h2 style="text-align:center;">🛸 ЗБІРКА КОСМОЛІТА</h2>
-            <p style="text-align:center; font-size:0.9rem; margin-bottom:25px;">Перетягни всі 5 деталей у правильні слоти</p>
-            
+            <p style="text-align:center; font-size:0.9rem; margin-bottom:15px;">Збирай по черзі:<br>Кабіна → Корпус → Крила → Хвіст → Двигуни</p>
+            <div class="color-picker">
+                <div class="color-btn" style="background:#88ddff" onclick="setShipColor('#88ddff')"></div>
+                <div class="color-btn" style="background:#ff44ff" onclick="setShipColor('#ff44ff')"></div>
+                <div class="color-btn" style="background:#44ff88" onclick="setShipColor('#44ff88')"></div>
+                <div class="color-btn" style="background:#ffcc44" onclick="setShipColor('#ffcc44')"></div>
+                <div class="color-btn" style="background:#ff6644" onclick="setShipColor('#ff6644')"></div>
+                <div class="color-btn" style="background:#00ffff" onclick="setShipColor('#00ffff')"></div>
+            </div>
             <div class="inventory" id="inventory"></div>
-            
             <div class="assembly-area" id="assembly-area">
                 <div class="slot" data-required="body" id="slot-body">🛩️ КОРПУС</div>
                 <div class="slot" data-required="wings" id="slot-wings">🪽 КРИЛА</div>
@@ -230,13 +93,9 @@
                 <div class="slot" data-required="engines" id="slot-engines">🔥 ДВИГУНИ</div>
                 <div class="slot" data-required="cockpit" id="slot-cockpit">🪟 КАБІНА</div>
             </div>
-
-            <div id="assembled-preview">
-                Збери всі деталі — побачиш свій космоліт! 🛸
-            </div>
-
+            <canvas id="ship-preview" width="620" height="260"></canvas>
             <div style="display:flex; justify-content:space-between; align-items:center; margin-top:30px;">
-                <div class="status-badge" id="assembly-status">⚙️ Деталей: 0/5</div>
+                <div class="status-badge" id="assembly-status">⚙️ Деталей: 0/5 • Наступна: КАБІНА</div>
                 <button id="check-assembly-btn">ЗАПУСТИТИ КОСМОЛІТ ✨</button>
             </div>
         </div>
@@ -255,32 +114,27 @@
         </div>
     </div>
 
-    <!-- ПЕРЕГОНИ — ТЕПЕР СКЛАДНІША ТРАСА -->
+    <!-- ПЕРЕГОНИ -->
     <div id="race-screen" class="screen">
         <div class="panel">
             <div id="race-rules">
                 🏁 <strong>ПРАВИЛА КОСМІЧНИХ ПЕРЕГОНІВ (5500 м)</strong><br>
-                ↑ ВГОРУ ↓ ВНИЗ — керування кораблем (W / S теж працює)<br>
-                💎 Перешкоди зачіпають ТІЛЬКИ якщо ви на одній доріжці!<br>
-                ⚡ Збирай БОНУСИ на доріжках!<br>
-                Цифри 1–5 — активуй суперсили<br>
-                Фінішуй першим! Траса стає складнішою з часом!
+                ↑ ВГОРУ ↓ ВНИЗ — керування (W/S теж)<br>
+                💎 Перешкоди тільки на одній доріжці!<br>
+                ⚡ Збирай бонуси!<br>
+                1–5 — суперсили<br>
+                Фінішуй першим!
             </div>
-
-            <h2 style="text-align:center; margin-bottom:15px;">🏁 КОСМІЧНІ ПЕРЕГОНИ (5500 м)</h2>
-            
+            <h2 style="text-align:center; margin-bottom:15px;">🏁 КОСМІЧНІ ПЕРЕГОНИ — РІВЕНЬ <span id="race-level-ui">1</span></h2>
             <div class="race-wrapper" id="race-wrapper">
                 <canvas id="raceCanvas" width="5500" height="820" style="width:100%; height:auto;"></canvas>
             </div>
-
             <div class="powers-row" id="race-powers-buttons"></div>
-
             <div style="display:flex; justify-content:space-between; gap:25px; flex-wrap:wrap; margin:20px 0;">
                 <div>🚀 Твоя швидкість: <span id="player-speed-ui">100</span>%</div>
                 <div>👾 Суперник: <span id="ai-speed-ui">100</span>%</div>
                 <div>📏 Прогрес: <span id="race-progress">0</span>%</div>
             </div>
-
             <div style="display:flex; gap:28px; justify-content:center;">
                 <button id="start-race-btn">🏁 СТАРТ ПЕРЕГОНІВ</button>
                 <button id="reset-full-btn" style="background:#f0f;">🔄 ЗАНОВО</button>
@@ -289,586 +143,747 @@
     </div>
 </div>
 
+<!-- WIN SCREEN -->
 <div id="win-screen" class="win-screen">
-    <h1 style="color:#0f0;">🏆 ПЕРЕМОГА!</h1>
-    <p>Твій зібраний космоліт — найкращий у галактиці! 🚀</p>
-    <button id="win-restart">ГРАТИ ЩЕ РАЗ</button>
+    <div class="tab-buttons">
+        <button class="tab-btn active" onclick="showWinTab(0)">🏆 ПЕРЕМОГА</button>
+        <button class="tab-btn" onclick="showWinTab(1)">🏆 АЧІВМЕНТИ</button>
+        <button class="tab-btn" onclick="showWinTab(2)">🛒 МАГАЗИН</button>
+    </div>
+    
+    <div id="win-tab-0">
+        <h1 style="color:#0f0;">ПЕРЕМОГА НА РІВНІ <span id="win-level"></span>!</h1>
+        <p id="win-time" style="font-size:1.6rem;color:#ff0;margin:15px 0 30px;"></p>
+        <h2 style="margin:25px 0 10px;color:#0ff;">🏆 ЛІДЕРБОРД РІВНЯ <span id="leaderboard-level"></span></h2>
+        <table id="leaderboard-table">
+            <thead><tr><th>#</th><th>Нік</th><th>Час</th><th>Дата</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    
+    <div id="win-tab-1" style="display:none;width:100%;max-width:920px;padding:0 20px;">
+        <h2 style="text-align:center;color:#0ff;">🏆 ТВОЇ АЧІВМЕНТИ</h2>
+        <div id="achievements-list" style="max-height:420px;overflow-y:auto;"></div>
+    </div>
+    
+    <div id="win-tab-2" style="display:none;width:100%;max-width:920px;padding:0 20px;">
+        <h2 style="text-align:center;color:#ff0;">🛒 КОСМО-МАГАЗИН</h2>
+        <div id="shop-items"></div>
+    </div>
+    
+    <button onclick="fullRestart()" style="margin-top:30px;">ГРАТИ ЩЕ РАЗ</button>
 </div>
+
 <div id="lose-screen" class="lose-screen">
     <h1 style="color:#f0f;">💥 ПОРАЗКА</h1>
-    <p>Астероїд або суперник випередив… Спробуй ще раз!</p>
-    <button id="lose-restart">ПОВТОРИТИ КВЕСТ</button>
+    <button onclick="fullRestart()">ПОВТОРИТИ КВЕСТ</button>
 </div>
 
+<audio id="bg-music" loop></audio>
+<audio id="sfx-drop"></audio>
+<audio id="sfx-correct"></audio>
+<audio id="sfx-wrong"></audio>
+<audio id="sfx-boost"></audio>
+<audio id="sfx-explosion"></audio>
+<audio id="sfx-win"></audio>
+
 <script>
-    (function(){
-        let assembledCount = 0;
-        let powers = [];
-        let currentQuestionIdx = 0;
-        let quizAnswersLock = false;
-        let currentQuestions = [];
+    // ====================== ГЛОБАЛЬНІ ЗМІННІ ======================
+    let assembledCount = 0, nextSlotIndex = 0, powers = [], currentQuestionIdx = 0;
+    let quizAnswersLock = false, correctAnswersThisQuiz = 0, currentQuestions = [];
+    let playerName = '', shipColor = '#88ddff', credits = 0, currentLevel = 1;
+    let raceStartTime = 0, raceCollided = false, totalBonusesCollected = 0;
+    let playerSpeedBaseBonus = 1, extraPowersOnStart = false, doubleCreditsNext = false;
+    let raceActive = false, playerX = 160, playerY = 260, aiX = 160, aiY = 460;
+    let playerSpeed = 3.6, aiSpeed = 3.85, animFrame = null, canvas, ctx;
+    let stars = [], obstacles = [], collectibles = [], difficulty = 1, distanceTraveled = 0;
+    let keysPressed = {};
 
-        const baseQuestions = [
-            { text: "Що таке HTML?", options: ["Мова програмування", "Мова розмітки веб-сторінок", "СУБД", "Графічний редактор"], correct: 1, power: { name: "ТУРБОПРИСКОРЮВАЧ", desc: "+40% швидкості 6с", effect: "boost" } },
-            { text: "CSS розшифровується як...", options: ["Cascading Style Sheets", "Computer Style Sheets", "Creative Style System", "Colorful Style Sheets"], correct: 0, power: { name: "НЕВИДИМИЙ ЩИТ", desc: "+28% прискорення", effect: "shield" } },
-            { text: "Що таке змінна в коді?", options: ["Константа", "Комірка для даних", "Функція", "Цикл"], correct: 1, power: { name: "ГАЛЬМО СУПЕРНИКА", desc: "Сповільнити ворога на 40%", effect: "slow" } },
-            { text: "Який цикл виконується поки умова істинна?", options: ["for", "while", "do-while", "foreach"], correct: 1, power: { name: "МЕГА-БУСТ", desc: "+75% швидкості 5с", effect: "mega" } },
-            { text: "Для чого використовується функція?", options: ["Повторне використання коду", "Оголошення змінних", "Стилізація", "Малювання"], correct: 0, power: { name: "РАКЕТНИЙ СТРИБОК", desc: "+220 пікселів вперед", effect: "rocket" } },
-            { text: "Що таке JavaScript?", options: ["Мова розмітки", "Мова програмування для веб", "База даних", "Операційна система"], correct: 1, power: { name: "ЛАЗЕРНИЙ ЩИТ", desc: "Імунітет 7 секунд", effect: "shield" } },
-            { text: "Що робить тег <img>?", options: ["Вставляє зображення", "Створює посилання", "Формує таблицю", "Додає текст"], correct: 0, power: { name: "ІМПУЛЬСНИЙ БУСТ", desc: "+55% на 4с", effect: "boost" } },
-            { text: "Що таке масив?", options: ["Змінна", "Колекція даних", "Функція", "Клас"], correct: 1, power: { name: "КРИЖАНИЙ УДАР", desc: "Зупинити ворога на 3с", effect: "slow" } },
-            { text: "Яка мова відповідає за стилі?", options: ["HTML", "CSS", "Python", "Java"], correct: 1, power: { name: "ГІПЕР-СТРИБОК", desc: "+280 пікселів", effect: "rocket" } },
-            { text: "Що таке API?", options: ["Інтерфейс для програм", "Мова стилів", "Тип даних", "Цикл"], correct: 0, power: { name: "МЕГА-БУСТ 2.0", desc: "+90% швидкості 6с", effect: "mega" } },
-            { text: "Що робить оператор ++?", options: ["Зменшує на 1", "Збільшує на 1", "Ділить", "Множить"], correct: 1, power: { name: "ТУРБОПРИСКОРЮВАЧ", desc: "+45% на 7с", effect: "boost" } },
-            { text: "Що таке DOM?", options: ["Документний об'єктний модель", "Мова стилів", "Сервер", "База даних"], correct: 0, power: { name: "НЕВИДИМИЙ ЩИТ", desc: "+30% захисту", effect: "shield" } },
-            { text: "Який тег створює посилання?", options: ["<a>", "<p>", "<div>", "<span>"], correct: 0, power: { name: "РАКЕТНИЙ СТРИБОК", desc: "+200 пікселів", effect: "rocket" } },
-            { text: "Що таке Boolean?", options: ["Число", "Логічний тип", "Рядок", "Масив"], correct: 1, power: { name: "ГАЛЬМО СУПЕРНИКА", desc: "-45% ворогу", effect: "slow" } },
-            { text: "Що робить console.log()?", options: ["Виводить у консоль", "Створює кнопку", "Змінює колір", "Завантажує файл"], correct: 0, power: { name: "МЕГА-БУСТ", desc: "+80% на 5с", effect: "mega" } }
-        ];
+    const FINISH_LINE = 5200, CANVAS_HEIGHT = 820, MIN_Y = 110, MAX_Y = 680, LANE_HEIGHT = 78, COLLISION_TOLERANCE = 42;
+    const MAX_LEVELS = 5;
 
-        let raceActive = false;
-        let playerX = 160, playerY = 260;
-        let aiX = 160, aiY = 460;
-        let playerSpeed = 3.6;
-        let aiSpeed = 3.85;
-        let animFrame = null;
-        let canvas = null, ctx = null;
-        let stars = [];
-        let obstacles = [];
-        let collectibles = [];        // НОВА ФІШКА — бонуси на трасі
-        let difficulty = 1;           // зростає з часом
-        let distanceTraveled = 0;
-        const FINISH_LINE = 5200;
-        
-        const CANVAS_HEIGHT = 820;
-        const MIN_Y = 110;
-        const MAX_Y = 680;
-        const LANE_HEIGHT = 78;
-        const COLLISION_TOLERANCE = 42;
-        
-        let keysPressed = {};
+    const assemblyOrder = ['cockpit', 'body', 'wings', 'tail', 'engines'];
+    const partsData = [
+        { id: 'body', name: 'КОРПУС', emoji: '🛸' },
+        { id: 'wings', name: 'КРИЛА', emoji: '🪽' },
+        { id: 'tail', name: 'ХВОСТ', emoji: '🚀' },
+        { id: 'engines', name: 'ДВИГУНИ', emoji: '⚡' },
+        { id: 'cockpit', name: 'КАБІНА', emoji: '👨‍🚀' }
+    ];
 
-        const partsData = [
-            { id: 'body', name: 'КОРПУС', emoji: '🛸' },
-            { id: 'wings', name: 'КРИЛА', emoji: '🪽' },
-            { id: 'tail', name: 'ХВОСТ', emoji: '🚀' },
-            { id: 'engines', name: 'ДВИГУНИ', emoji: '⚡' },
-            { id: 'cockpit', name: 'КАБІНА', emoji: '👨‍🚀' }
-        ];
+    let leaderboardData = {}; // {1: [], 2: [], ...}
 
-        function initDragAndDrop() {
-            const parts = document.querySelectorAll('.part');
-            const slots = document.querySelectorAll('.slot');
-            parts.forEach(part => {
-                part.setAttribute('draggable', 'true');
-                part.addEventListener('dragstart', handleDragStart);
-                part.addEventListener('dragend', handleDragEnd);
-            });
-            slots.forEach(slot => {
-                slot.addEventListener('dragover', handleDragOver);
-                slot.addEventListener('dragleave', handleDragLeave);
-                slot.addEventListener('drop', handleDrop);
-            });
+    let achievements = [
+        {id:'first_win', name:'Перший політ', desc:'Перемогти в першій гонці', icon:'🚀', unlocked:false},
+        {id:'genius', name:'Геній інформатики', desc:'100% у квізі', icon:'🧠', unlocked:false},
+        {id:'speed_demon', name:'Швидкісний демон', desc:'Траса < 45 сек', icon:'⚡', unlocked:false},
+        {id:'no_crash', name:'Невразливий', desc:'Без зіткнень', icon:'🛡️', unlocked:false},
+        {id:'collector', name:'Колекціонер', desc:'8+ бонусів за гонку', icon:'💎', unlocked:false},
+        {id:'level_master', name:'Майстер рівнів', desc:'Досягти 5 рівня', icon:'🌌', unlocked:false}
+    ];
+
+    const baseQuestions = [ /* повний список питань */ 
+        { text: "Що таке HTML?", options: ["Мова програмування", "Мова розмітки веб-сторінок", "СУБД", "Графічний редактор"], correct: 1, power: { name: "ТУРБОПРИСКОРЮВАЧ", desc: "+40% швидкості 6с", effect: "boost" } },
+        { text: "CSS розшифровується як...", options: ["Cascading Style Sheets", "Computer Style Sheets", "Creative Style System", "Colorful Style Sheets"], correct: 0, power: { name: "НЕВИДИМИЙ ЩИТ", desc: "+28% прискорення", effect: "shield" } },
+        { text: "Що таке змінна в коді?", options: ["Константа", "Комірка для даних", "Функція", "Цикл"], correct: 1, power: { name: "ГАЛЬМО СУПЕРНИКА", desc: "Сповільнити ворога на 40%", effect: "slow" } },
+        { text: "Який цикл виконується поки умова істинна?", options: ["for", "while", "do-while", "foreach"], correct: 1, power: { name: "МЕГА-БУСТ", desc: "+75% швидкості 5с", effect: "mega" } },
+        { text: "Для чого використовується функція?", options: ["Повторне використання коду", "Оголошення змінних", "Стилізація", "Малювання"], correct: 0, power: { name: "РАКЕТНИЙ СТРИБОК", desc: "+220 пікселів вперед", effect: "rocket" } },
+        { text: "Що таке JavaScript?", options: ["Мова розмітки", "Мова програмування для веб", "База даних", "Операційна система"], correct: 1, power: { name: "ЛАЗЕРНИЙ ЩИТ", desc: "Імунітет 7 секунд", effect: "shield" } },
+        { text: "Що робить тег <img>?", options: ["Вставляє зображення", "Створює посилання", "Формує таблицю", "Додає текст"], correct: 0, power: { name: "ІМПУЛЬСНИЙ БУСТ", desc: "+55% на 4с", effect: "boost" } },
+        { text: "Що таке масив?", options: ["Змінна", "Колекція даних", "Функція", "Клас"], correct: 1, power: { name: "КРИЖАНИЙ УДАР", desc: "Зупинити ворога на 3с", effect: "slow" } },
+        { text: "Яка мова відповідає за стилі?", options: ["HTML", "CSS", "Python", "Java"], correct: 1, power: { name: "ГІПЕР-СТРИБОК", desc: "+280 пікселів", effect: "rocket" } },
+        { text: "Що таке API?", options: ["Інтерфейс для програм", "Мова стилів", "Тип даних", "Цикл"], correct: 0, power: { name: "МЕГА-БУСТ 2.0", desc: "+90% швидкості 6с", effect: "mega" } },
+        { text: "Що робить оператор ++?", options: ["Зменшує на 1", "Збільшує на 1", "Ділить", "Множить"], correct: 1, power: { name: "ТУРБОПРИСКОРЮВАЧ", desc: "+45% на 7с", effect: "boost" } },
+        { text: "Що таке DOM?", options: ["Документний об'єктний модель", "Мова стилів", "Сервер", "База даних"], correct: 0, power: { name: "НЕВИДИМИЙ ЩИТ", desc: "+30% захисту", effect: "shield" } },
+        { text: "Який тег створює посилання?", options: ["<a>", "<p>", "<div>", "<span>"], correct: 0, power: { name: "РАКЕТНИЙ СТРИБОК", desc: "+200 пікселів", effect: "rocket" } },
+        { text: "Що таке Boolean?", options: ["Число", "Логічний тип", "Рядок", "Масив"], correct: 1, power: { name: "ГАЛЬМО СУПЕРНИКА", desc: "-45% ворогу", effect: "slow" } },
+        { text: "Що робить console.log()?", options: ["Виводить у консоль", "Створює кнопку", "Змінює колір", "Завантажує файл"], correct: 0, power: { name: "МЕГА-БУСТ", desc: "+80% на 5с", effect: "mega" } }
+    ];
+
+    // ====================== ПЕРСОНАЛЬНЕ ЗБЕРЕЖЕННЯ ======================
+    function getPlayerKey(name) { return `cosmoquest_${(name || '').toLowerCase().trim()}`; }
+
+    function loadPlayerProgress(name) {
+        const key = getPlayerKey(name);
+        const saved = localStorage.getItem(key);
+        if (saved) {
+            const data = JSON.parse(saved);
+            credits = data.credits || 0;
+            currentLevel = Math.min(data.currentLevel || 1, MAX_LEVELS);
+            shipColor = data.shipColor || '#88ddff';
+            playerSpeedBaseBonus = data.playerSpeedBaseBonus || 1;
+            extraPowersOnStart = data.extraPowersOnStart || false;
+            doubleCreditsNext = data.doubleCreditsNext || false;
+            achievements = data.achievements || achievements;
+            return true;
         }
+        credits = 0; currentLevel = 1; shipColor = '#88ddff';
+        playerSpeedBaseBonus = 1; extraPowersOnStart = false; doubleCreditsNext = false;
+        achievements = achievements.map(a => ({...a, unlocked: false}));
+        return false;
+    }
 
-        let draggedPartId = null;
-        function handleDragStart(e) { draggedPartId = e.target.closest('.part')?.dataset.part; e.dataTransfer.setData('text/plain', draggedPartId); e.target.style.opacity = '0.5'; }
-        function handleDragEnd(e) { e.target.style.opacity = ''; draggedPartId = null; }
-        function handleDragOver(e) { e.preventDefault(); const slot = e.target.closest('.slot'); if(slot && !slot.classList.contains('filled')) slot.classList.add('drag-over'); }
-        function handleDragLeave(e) { const slot = e.target.closest('.slot'); if(slot) slot.classList.remove('drag-over'); }
+    function savePlayerProgress() {
+        if (!playerName) return;
+        const key = getPlayerKey(playerName);
+        localStorage.setItem(key, JSON.stringify({
+            credits, currentLevel, shipColor, playerSpeedBaseBonus,
+            extraPowersOnStart, doubleCreditsNext, achievements
+        }));
+    }
 
-        function handleDrop(e) {
-            e.preventDefault();
-            const slot = e.target.closest('.slot');
-            if(!slot || slot.classList.contains('filled')) return;
-            slot.classList.remove('drag-over');
-            const partId = e.dataTransfer.getData('text/plain');
-            const required = slot.dataset.required;
-            
-            if(partId === required) {
-                slot.classList.add('filled');
-                const emoji = partsData.find(p => p.id === partId).emoji;
-                slot.innerHTML = `<div style="font-size:3.2rem;">${emoji}</div><div style="font-size:0.8rem;">✔️</div>`;
-                assembledCount++;
-                document.getElementById('assembly-status').innerHTML = `⚙️ Деталей: ${assembledCount}/5`;
-                
-                const el = document.querySelector(`.part[data-part="${partId}"]`);
-                if(el) el.remove();
-                
-                refreshInventoryAndDrag();
-                updateAssembledPreview();
-            } else {
-                slot.style.borderColor = 'red';
-                setTimeout(() => { if(!slot.classList.contains('filled')) slot.style.borderColor = '#7f8c8d'; }, 700);
-            }
+    // ====================== ЛІДЕРБОРДИ ПО РІВНЯХ ======================
+    function loadAllLeaderboards() {
+        leaderboardData = {};
+        for (let i = 1; i <= MAX_LEVELS; i++) {
+            const saved = localStorage.getItem(`cosmoquest_lb_level${i}`);
+            leaderboardData[i] = saved ? JSON.parse(saved) : [];
         }
+    }
 
-        function refreshInventoryAndDrag() {
-            const used = Array.from(document.querySelectorAll('.slot.filled')).map(s => s.dataset.required);
-            const available = partsData.filter(p => !used.includes(p.id));
-            const inv = document.getElementById('inventory');
-            inv.innerHTML = '';
-            available.forEach(part => {
-                const div = document.createElement('div');
-                div.className = 'part';
-                div.setAttribute('data-part', part.id);
-                div.setAttribute('draggable', 'true');
-                div.innerHTML = `<div style="font-size:3.6rem;">${part.emoji}</div><div style="margin-top:12px;">${part.name}</div>`;
-                inv.appendChild(div);
-            });
-            const newParts = document.querySelectorAll('.part');
-            newParts.forEach(p => { p.addEventListener('dragstart', handleDragStart); p.addEventListener('dragend', handleDragEnd); });
+    function saveToLeaderboard(time) {
+        if (!playerName) return;
+        const level = currentLevel;
+        const entry = { name: playerName, time: parseFloat(time.toFixed(1)), date: Date.now(), timestamp: new Date().toLocaleString('uk-UA') };
+        if (!leaderboardData[level]) leaderboardData[level] = [];
+        leaderboardData[level].unshift(entry);
+        if (leaderboardData[level].length > 15) leaderboardData[level].pop();
+        localStorage.setItem(`cosmoquest_lb_level${level}`, JSON.stringify(leaderboardData[level]));
+    }
+
+    function renderLeaderboardForLevel() {
+        const tbody = document.querySelector('#leaderboard-table tbody');
+        tbody.innerHTML = '';
+        const level = currentLevel;
+        const list = leaderboardData[level] || [];
+        list.sort((a,b) => a.time - b.time).slice(0,10).forEach((e,i) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>#${i+1}</td><td>${e.name}</td><td style="color:#ff0">${e.time}</td><td style="font-size:0.85rem">${e.timestamp}</td>`;
+            tbody.appendChild(tr);
+        });
+        if (list.length === 0) tbody.innerHTML = `<tr><td colspan="4" style="padding:40px;">Поки немає результатів на цьому рівні</td></tr>`;
+    }
+
+    // ====================== ЗВУКИ ======================
+    const audioFiles = {
+        bg: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3',
+        drop: 'https://assets.mixkit.co/sfx/preview/296/296-preview.mp3',
+        correct: 'https://assets.mixkit.co/sfx/preview/269/269-preview.mp3',
+        wrong: 'https://assets.mixkit.co/sfx/preview/274/274-preview.mp3',
+        boost: 'https://assets.mixkit.co/sfx/preview/277/277-preview.mp3',
+        explosion: 'https://assets.mixkit.co/sfx/preview/281/281-preview.mp3',
+        win: 'https://assets.mixkit.co/sfx/preview/276/276-preview.mp3'
+    };
+    let audioElements = {};
+
+    function initAudio() {
+        Object.keys(audioFiles).forEach(key => {
+            const a = new Audio(audioFiles[key]);
+            a.preload = 'auto';
+            audioElements[key] = a;
+        });
+        if (audioElements.bg) audioElements.bg.volume = 0.35;
+    }
+
+    function playSound(type) {
+        if (audioElements[type]) {
+            audioElements[type].currentTime = 0;
+            audioElements[type].play().catch(() => {});
         }
+    }
 
-        function updateAssembledPreview() {
-            const preview = document.getElementById('assembled-preview');
-            if (assembledCount < 5) {
-                preview.innerHTML = `🛠️ Зібрано ${assembledCount}/5 деталей`;
-                preview.classList.remove('flying');
-            } else {
-                preview.innerHTML = `🛸<br><span style="font-size:1.8rem; display:block; margin-top:15px; color:#0ff;">ТВІЙ КОСМОЛІТ ГОТОВИЙ ДО СТАРТУ!</span>`;
-                preview.classList.add('flying');
-            }
+    // ====================== КОЛІР ТА ПРЕВ’Ю ======================
+    let previewCtx;
+    function setShipColor(color) {
+        shipColor = color;
+        savePlayerProgress();
+        drawShipPreview();
+    }
+
+    function drawShipPreview() {
+        const canvas = document.getElementById('ship-preview');
+        if (!previewCtx) previewCtx = canvas.getContext('2d');
+        previewCtx.clearRect(0, 0, canvas.width, canvas.height);
+        previewCtx.fillStyle = '#030318'; previewCtx.fillRect(0, 0, canvas.width, canvas.height);
+        previewCtx.save();
+        previewCtx.translate(310, 130); previewCtx.scale(1.4, 1.4);
+        previewCtx.fillStyle = shipColor;
+        previewCtx.beginPath(); previewCtx.moveTo(60,0); previewCtx.lineTo(-60,40); previewCtx.lineTo(-60,-40); previewCtx.closePath(); previewCtx.fill();
+        if (assembledCount >= 1) { previewCtx.fillStyle = '#0ff'; previewCtx.fillRect(-35,-18,35,36); }
+        if (assembledCount >= 3) {
+            previewCtx.fillStyle = '#fff';
+            previewCtx.beginPath(); previewCtx.moveTo(-30,0); previewCtx.lineTo(-70,55); previewCtx.lineTo(-35,20); previewCtx.fill();
+            previewCtx.beginPath(); previewCtx.moveTo(-30,0); previewCtx.lineTo(-70,-55); previewCtx.lineTo(-35,-20); previewCtx.fill();
         }
-
-        function checkAssemblyAndProceed() {
-            if(assembledCount === 5) {
-                switchScreen('quiz');
-                startQuiz();
-            } else {
-                alert("❌ Збери ВСІ 5 деталей!");
-            }
+        if (assembledCount >= 4) { previewCtx.fillStyle = '#ff0'; previewCtx.fillRect(-75,-12,20,24); }
+        if (assembledCount >= 5) {
+            previewCtx.fillStyle = '#f80'; previewCtx.fillRect(-85,-22,18,12); previewCtx.fillRect(-85,10,18,12);
+            previewCtx.fillStyle = '#f00'; previewCtx.fillRect(-105,-28,25,8); previewCtx.fillRect(-105,20,25,8);
         }
+        previewCtx.restore();
+        previewCtx.fillStyle = '#0ff'; previewCtx.font = 'bold 22px Press Start 2P'; previewCtx.textAlign = 'center';
+        previewCtx.fillText(assembledCount === 5 ? 'ГОТОВИЙ ДО СТАРТУ!' : `Зібрано ${assembledCount}/5`, 310, 245);
+    }
 
-        function startQuiz() {
-            currentQuestionIdx = 0;
-            powers = [];
-            currentQuestions = [...baseQuestions].sort(() => Math.random() - 0.5).slice(0, 5);
-            
+    // ====================== ЗБІРКА ======================
+    function updateAssemblyStatus() {
+        const statusEl = document.getElementById('assembly-status');
+        const nextName = nextSlotIndex >= assemblyOrder.length ? 'ГОТОВО!' : partsData.find(p => p.id === assemblyOrder[nextSlotIndex]).name;
+        statusEl.innerHTML = `⚙️ Деталей: ${assembledCount}/5 • Наступна: <span style="color:#ff0">${nextName}</span>`;
+    }
+
+    function highlightNextSlot() {
+        document.querySelectorAll('.slot').forEach(s => s.classList.remove('next'));
+        if (nextSlotIndex < assemblyOrder.length) {
+            const el = document.getElementById('slot-' + assemblyOrder[nextSlotIndex]);
+            if (el) el.classList.add('next');
+        }
+    }
+
+    function initDragAndDrop() {
+        const parts = document.querySelectorAll('.part');
+        const slots = document.querySelectorAll('.slot');
+        parts.forEach(part => { part.setAttribute('draggable', 'true'); part.addEventListener('dragstart', handleDragStart); part.addEventListener('dragend', handleDragEnd); });
+        slots.forEach(slot => {
+            slot.addEventListener('dragover', handleDragOver);
+            slot.addEventListener('dragleave', handleDragLeave);
+            slot.addEventListener('drop', handleDrop);
+        });
+    }
+
+    let draggedPartId = null;
+    function handleDragStart(e) { draggedPartId = e.target.closest('.part')?.dataset.part; e.dataTransfer.setData('text/plain', draggedPartId); e.target.style.opacity = '0.5'; }
+    function handleDragEnd(e) { e.target.style.opacity = ''; draggedPartId = null; }
+    function handleDragOver(e) { e.preventDefault(); const slot = e.target.closest('.slot'); if(slot && !slot.classList.contains('filled')) slot.classList.add('drag-over'); }
+    function handleDragLeave(e) { const slot = e.target.closest('.slot'); if(slot) slot.classList.remove('drag-over'); }
+
+    function handleDrop(e) {
+        e.preventDefault();
+        const slot = e.target.closest('.slot');
+        if(!slot || slot.classList.contains('filled')) return;
+        slot.classList.remove('drag-over');
+        const partId = e.dataTransfer.getData('text/plain');
+        const required = slot.dataset.required;
+        if (nextSlotIndex < assemblyOrder.length && required !== assemblyOrder[nextSlotIndex]) {
+            slot.style.borderColor = '#ff9900';
+            setTimeout(() => { if(!slot.classList.contains('filled')) slot.style.borderColor = '#7f8c8d'; }, 900);
+            return;
+        }
+        if(partId === required) {
+            playSound('drop');
+            slot.classList.add('filled');
+            const emoji = partsData.find(p => p.id === partId).emoji;
+            slot.innerHTML = `<div style="font-size:3.2rem;">${emoji}</div><div style="font-size:0.8rem;">✔️</div>`;
+            assembledCount++;
+            const el = document.querySelector(`.part[data-part="${partId}"]`);
+            if(el) el.remove();
+            nextSlotIndex++;
+            refreshInventoryAndDrag();
+            updateAssembledPreview();
+            highlightNextSlot();
+            updateAssemblyStatus();
+            drawShipPreview();
+        } else {
+            slot.style.borderColor = 'red';
+            setTimeout(() => { if(!slot.classList.contains('filled')) slot.style.borderColor = '#7f8c8d'; }, 700);
+        }
+    }
+
+    function refreshInventoryAndDrag() {
+        const used = Array.from(document.querySelectorAll('.slot.filled')).map(s => s.dataset.required);
+        const available = partsData.filter(p => !used.includes(p.id));
+        const inv = document.getElementById('inventory');
+        inv.innerHTML = '';
+        available.forEach(part => {
+            const div = document.createElement('div');
+            div.className = 'part';
+            div.setAttribute('data-part', part.id);
+            div.setAttribute('draggable', 'true');
+            div.innerHTML = `<div style="font-size:3.6rem;">${part.emoji}</div><div style="margin-top:12px;">${part.name}</div>`;
+            inv.appendChild(div);
+        });
+        const newParts = document.querySelectorAll('.part');
+        newParts.forEach(p => { p.addEventListener('dragstart', handleDragStart); p.addEventListener('dragend', handleDragEnd); });
+    }
+
+    function updateAssembledPreview() {
+        const preview = document.getElementById('assembled-preview');
+        if (!preview) return;
+        if (assembledCount < 5) {
+            preview.innerHTML = `🛠️ Зібрано ${assembledCount}/5 деталей`;
+            preview.classList.remove('flying');
+        } else {
+            preview.innerHTML = `🛸<br><span style="font-size:1.8rem; display:block; margin-top:15px; color:#0ff;">ТВІЙ КОСМОЛІТ ГОТОВИЙ ДО СТАРТУ!</span>`;
+            preview.classList.add('flying');
+        }
+    }
+
+    function checkAssemblyAndProceed() {
+        if(assembledCount === 5) {
+            switchScreen('quiz');
+            startQuiz();
+        } else {
+            alert("❌ Збери ВСІ 5 деталей по порядку!");
+        }
+    }
+
+    // ====================== КВІЗ ======================
+    function startQuiz() {
+        currentQuestionIdx = 0; powers = []; correctAnswersThisQuiz = 0;
+        currentQuestions = [...baseQuestions].sort(() => Math.random() - 0.5).slice(0, 5);
+        const powersDiv = document.getElementById('powers-collected');
+        powersDiv.innerHTML = '<div style="width:100%; text-align:center; font-size:0.85rem;">⭐ Суперсили з’являться тут ⭐</div>';
+        document.getElementById('q-counter').innerText = '1';
+        renderQuestion();
+    }
+
+    function renderQuestion() {
+        if(currentQuestionIdx >= currentQuestions.length) {
+            checkAchievementsAfterQuiz();
+            switchScreen('race');
+            prepareRaceScreen();
+            return;
+        }
+        const q = currentQuestions[currentQuestionIdx];
+        document.getElementById('question-text').innerHTML = q.text;
+        const optsDiv = document.getElementById('options-container');
+        optsDiv.innerHTML = '';
+        q.options.forEach((opt, i) => {
+            const el = document.createElement('div');
+            el.className = 'quiz-option';
+            el.innerText = opt;
+            el.onclick = () => handleAnswer(i);
+            optsDiv.appendChild(el);
+        });
+        document.getElementById('q-counter').innerText = currentQuestionIdx + 1;
+        quizAnswersLock = false;
+    }
+
+    function handleAnswer(selected) {
+        if(quizAnswersLock) return;
+        quizAnswersLock = true;
+        const q = currentQuestions[currentQuestionIdx];
+        const correct = (selected === q.correct);
+        const opts = document.querySelectorAll('.quiz-option');
+        opts.forEach((opt, i) => {
+            if(i === q.correct) opt.style.borderColor = '#0f0';
+            if(i === selected && !correct) opt.style.borderColor = '#f00';
+            opt.style.pointerEvents = 'none';
+        });
+        if(correct) {
+            correctAnswersThisQuiz++;
+            playSound('correct');
+            powers.push({...q.power});
             const powersDiv = document.getElementById('powers-collected');
-            powersDiv.innerHTML = '<div style="width:100%; text-align:center; font-size:0.85rem;">⭐ Суперсили з’являться тут ⭐</div>';
-            document.getElementById('q-counter').innerText = '1';
-            renderQuestion();
+            const badge = document.createElement('div');
+            badge.className = 'power-btn';
+            badge.style.background = '#ff44cc';
+            badge.innerHTML = `${q.power.name}<br><span style="font-size:0.6rem;">${q.power.desc}</span>`;
+            powersDiv.appendChild(badge);
+        } else playSound('wrong');
+        setTimeout(() => { currentQuestionIdx++; renderQuestion(); }, 1350);
+    }
+
+    function checkAchievementsAfterQuiz() {
+        if (correctAnswersThisQuiz === 5) unlockAchievement('genius');
+    }
+
+    // ====================== АЧІВМЕНТИ ======================
+    function unlockAchievement(id) {
+        const ach = achievements.find(a => a.id === id);
+        if (ach && !ach.unlocked) {
+            ach.unlocked = true;
+            savePlayerProgress();
+            const notif = document.createElement('div');
+            notif.style.cssText = 'position:fixed;top:30px;left:50%;transform:translateX(-50%);background:#0f0;color:#000;padding:15px 30px;border-radius:50px;font-size:1.1rem;box-shadow:0 0 30px #0f0;z-index:9999;';
+            notif.innerHTML = `🏆 ${ach.name} ОТРИМАНО!`;
+            document.body.appendChild(notif);
+            setTimeout(() => notif.remove(), 2800);
+        }
+    }
+
+    function checkAchievementsAfterRace(win) {
+        if (win) {
+            unlockAchievement('first_win');
+            if (currentLevel >= MAX_LEVELS) unlockAchievement('level_master');
+            if (!raceCollided) unlockAchievement('no_crash');
+            if (totalBonusesCollected >= 8) unlockAchievement('collector');
+            if ((Date.now() - raceStartTime)/1000 < 45) unlockAchievement('speed_demon');
+        }
+    }
+
+    function renderAchievements(container) {
+        container.innerHTML = '';
+        achievements.forEach(ach => {
+            const div = document.createElement('div');
+            div.className = `achievement ${ach.unlocked ? '' : 'locked'}`;
+            div.innerHTML = `<div style="font-size:3rem;">${ach.icon}</div><div><strong>${ach.name}</strong><br><span style="font-size:0.9rem;">${ach.desc}</span></div>${ach.unlocked ? '<span style="color:#0f0;margin-left:auto;">✓</span>' : '<span style="color:#666;margin-left:auto;">🔒</span>'}`;
+            container.appendChild(div);
+        });
+    }
+
+    // ====================== МАГАЗИН ======================
+    const shopItems = [
+        {id:'perm_boost', name:'+15% постійної швидкості', price:180, action:()=>{ credits -= 180; playerSpeedBaseBonus = 1.15; savePlayerProgress(); }},
+        {id:'extra_power', name:'+1 суперсила на старті', price:130, action:()=>{ credits -= 130; extraPowersOnStart = true; savePlayerProgress(); }},
+        {id:'double_credits', name:'Подвійні кредити (наступна)', price:90, action:()=>{ credits -= 90; doubleCreditsNext = true; savePlayerProgress(); }}
+    ];
+
+    function renderShop() {
+        const container = document.getElementById('shop-items');
+        container.innerHTML = `<p style="text-align:center;">💎 Кредити: <strong>${credits}</strong></p>`;
+        shopItems.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'shop-item';
+            div.innerHTML = `<div><strong>${item.name}</strong></div><div style="text-align:right;"><span style="color:#ff0">${item.price} 💎</span><br><button onclick="buyItem('${item.id}')" ${credits < item.price ? 'disabled' : ''}>КУПИТИ</button></div>`;
+            container.appendChild(div);
+        });
+    }
+
+    window.buyItem = function(id) {
+        const item = shopItems.find(i => i.id === id);
+        if (!item || credits < item.price) return;
+        item.action();
+        document.getElementById('credits-ui').textContent = credits;
+        renderShop();
+        alert('✅ Куплено!');
+    };
+
+    // ====================== ПЕРЕГОНИ ======================
+    function generateStars() {
+        stars = [];
+        for(let i = 0; i < 620; i++) stars.push({x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 4.8 + 1.8, speed: Math.random() * 2.4 + 0.7});
+    }
+
+    function drawStaticScene() {
+        ctx.fillStyle = '#030318'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'white';
+        stars.forEach(s => { ctx.globalAlpha = 0.8; ctx.fillRect(s.x, s.y, s.size, s.size); });
+        ctx.globalAlpha = 1;
+        ctx.strokeStyle = '#0ff'; ctx.setLineDash([6, 14]); ctx.lineWidth = 6;
+        for(let i = 0; i < 13; i++) { let y = 78 + i * LANE_HEIGHT; ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke(); }
+        ctx.setLineDash([]);
+        ctx.lineWidth = 22; ctx.strokeStyle = '#ffcc44';
+        ctx.beginPath(); ctx.moveTo(FINISH_LINE, 40); ctx.lineTo(FINISH_LINE, canvas.height - 40); ctx.stroke();
+        ctx.fillStyle = '#ffcc44'; ctx.font = "bold 48px 'Press Start 2P'"; ctx.fillText("ФІНІШ", FINISH_LINE - 190, 82);
+        drawPlanes();
+    }
+
+    function drawPlanes() {
+        ctx.font = "128px monospace";
+        ctx.fillStyle = "#88ddff"; ctx.shadowBlur = 40; ctx.shadowColor = "#0ff"; ctx.fillText("🛸", playerX, playerY); ctx.shadowBlur = 0;
+        ctx.fillStyle = "#ff66cc"; ctx.fillText("✈️", aiX, aiY);
+    }
+
+    function updateStars() { stars.forEach(s => { s.x -= s.speed; if(s.x < 0) s.x = canvas.width; }); }
+
+    function updateSpeedDisplay() {
+        document.getElementById('player-speed-ui').innerHTML = Math.round(playerSpeed * 29);
+        document.getElementById('ai-speed-ui').innerHTML = Math.round(aiSpeed * 29);
+        const progress = Math.min(100, Math.floor((playerX / FINISH_LINE) * 100));
+        document.getElementById('race-progress').innerHTML = progress;
+    }
+
+    function raceRender() {
+        if(!raceActive) return;
+        updateStars();
+        ctx.fillStyle = '#030318'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'white';
+        stars.forEach(s => { ctx.globalAlpha = 0.8; ctx.fillRect(s.x, s.y, s.size, s.size); });
+        ctx.globalAlpha = 1;
+        ctx.strokeStyle = '#0ff'; ctx.setLineDash([6,14]); ctx.lineWidth = 6;
+        for(let i = 0; i < 13; i++) { let y = 78 + i * LANE_HEIGHT; ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke(); }
+        ctx.setLineDash([]);
+        ctx.lineWidth = 22; ctx.strokeStyle = '#ffcc44';
+        ctx.beginPath(); ctx.moveTo(FINISH_LINE, 40); ctx.lineTo(FINISH_LINE, canvas.height - 40); ctx.stroke();
+        ctx.fillStyle = '#ffcc44'; ctx.font = "bold 48px 'Press Start 2P'"; ctx.fillText("ФІНІШ", FINISH_LINE - 190, 82);
+        drawPlanes();
+        ctx.font = "88px monospace"; obstacles.forEach(o => ctx.fillText(o.emoji, o.x, o.y));
+        ctx.font = "72px monospace";
+        collectibles.forEach(c => { ctx.shadowBlur = 20; ctx.shadowColor = "#ff0"; ctx.fillText(c.emoji, c.x, c.y); ctx.shadowBlur = 0; });
+        updateSpeedDisplay();
+        const wrapper = document.getElementById('race-wrapper');
+        wrapper.scrollLeft = Math.max(0, playerX - 720);
+    }
+
+    function raceLoop() {
+        if(!raceActive) return;
+        playerX += playerSpeed; aiX += aiSpeed; distanceTraveled = playerX;
+        difficulty = currentLevel + Math.floor(distanceTraveled / 1100);
+
+        if (keysPressed['ArrowUp'] || keysPressed['w'] || keysPressed['W']) playerY -= 11;
+        if (keysPressed['ArrowDown'] || keysPressed['s'] || keysPressed['S']) playerY += 11;
+        playerY = Math.max(MIN_Y, Math.min(MAX_Y, playerY));
+
+        if(Math.random() < 0.038 + difficulty * 0.008 && obstacles.length < 16) {
+            const laneIndex = Math.floor(Math.random() * 11) + 1;
+            const obstacleY = 78 + laneIndex * LANE_HEIGHT + 12;
+            obstacles.push({x: playerX + 720 + Math.random() * 1400, y: obstacleY, emoji: ['☄️','🌑','🪐','💥','⚡'][Math.floor(Math.random()*5)], vy: (Math.random() - 0.5) * 1.8});
         }
 
-        function renderQuestion() {
-            if(currentQuestionIdx >= currentQuestions.length) {
-                switchScreen('race');
-                prepareRaceScreen();
-                return;
-            }
-            const q = currentQuestions[currentQuestionIdx];
-            document.getElementById('question-text').innerHTML = q.text;
-            const optsDiv = document.getElementById('options-container');
-            optsDiv.innerHTML = '';
-            q.options.forEach((opt, i) => {
-                const el = document.createElement('div');
-                el.className = 'quiz-option';
-                el.innerText = opt;
-                el.onclick = () => handleAnswer(i);
-                optsDiv.appendChild(el);
-            });
-            document.getElementById('q-counter').innerText = currentQuestionIdx + 1;
-            quizAnswersLock = false;
+        if(Math.random() < 0.018 && collectibles.length < 4) {
+            const laneIndex = Math.floor(Math.random() * 11) + 1;
+            const bonusY = 78 + laneIndex * LANE_HEIGHT + 12;
+            collectibles.push({x: playerX + 800 + Math.random() * 1600, y: bonusY, emoji: ['⚡','🔥','🌀','💎'][Math.floor(Math.random()*4)], type: ['boost','mega','rocket','shield'][Math.floor(Math.random()*4)]});
         }
 
-        function handleAnswer(selected) {
-            if(quizAnswersLock) return;
-            quizAnswersLock = true;
-            const q = currentQuestions[currentQuestionIdx];
-            const correct = (selected === q.correct);
-            const opts = document.querySelectorAll('.quiz-option');
-            opts.forEach((opt, i) => {
-                if(i === q.correct) opt.style.borderColor = '#0f0';
-                if(i === selected && !correct) opt.style.borderColor = '#f00';
-                opt.style.pointerEvents = 'none';
-            });
-            if(correct) {
-                powers.push({...q.power});
-                const powersDiv = document.getElementById('powers-collected');
-                const badge = document.createElement('div');
-                badge.className = 'power-btn';
-                badge.style.background = '#ff44cc';
-                badge.innerHTML = `${q.power.name}<br><span style="font-size:0.6rem;">${q.power.desc}</span>`;
-                powersDiv.appendChild(badge);
+        obstacles = obstacles.filter(o => o.x > playerX - 220);
+        collectibles = collectibles.filter(c => c.x > playerX - 220);
+
+        obstacles.forEach(o => { if(o.vy) o.y += o.vy; if(o.y < MIN_Y + 30 || o.y > MAX_Y - 30) o.vy *= -1; });
+
+        for(let i = 0; i < obstacles.length; i++) {
+            const o = obstacles[i];
+            const sameLane = Math.abs(playerY - o.y) < COLLISION_TOLERANCE;
+            const horizontalHit = Math.abs(playerX + 45 - o.x) < 85;
+            if(sameLane && horizontalHit) {
+                raceActive = false; raceCollided = true; playSound('explosion');
+                document.getElementById('lose-screen').style.display = 'flex';
+                cancelAnimationFrame(animFrame); return;
             }
-            setTimeout(() => { currentQuestionIdx++; renderQuestion(); }, 1350);
         }
 
-        function prepareRaceScreen() {
-            canvas = document.getElementById('raceCanvas');
-            ctx = canvas.getContext('2d');
-            canvas.width = 5500;
-            canvas.height = CANVAS_HEIGHT;
-            generateStars();
-            drawStaticScene();
-
-            const container = document.getElementById('race-powers-buttons');
-            container.innerHTML = '<div style="width:100%; text-align:center; font-size:1.1rem;">✨ СУПЕРСИЛИ (цифри 1-5) ✨</div>';
-            if(powers.length === 0) {
-                container.innerHTML += '<div style="color:#ffaa44;">Немає сил — чиста майстерність!</div>';
-            } else {
-                powers.forEach((p,i) => {
-                    const btn = document.createElement('button');
-                    btn.className = 'power-btn';
-                    btn.innerText = `${p.name} (${p.desc})`;
-                    btn.onclick = () => activatePowerInRace(i);
-                    container.appendChild(btn);
-                });
+        for(let i = collectibles.length - 1; i >= 0; i--) {
+            const c = collectibles[i];
+            const sameLane = Math.abs(playerY - c.y) < COLLISION_TOLERANCE;
+            const horizontalHit = Math.abs(playerX + 45 - c.x) < 85;
+            if(sameLane && horizontalHit) {
+                totalBonusesCollected++;
+                playSound('boost');
+                if(c.type === 'boost') playerSpeed *= 1.6;
+                else if(c.type === 'mega') playerSpeed *= 2.2;
+                else if(c.type === 'rocket') playerX = Math.min(FINISH_LINE - 80, playerX + 280);
+                else if(c.type === 'shield') playerSpeed *= 1.35;
+                setTimeout(() => { if(raceActive) { if(c.type === 'boost') playerSpeed /= 1.6; else if(c.type === 'mega') playerSpeed /= 2.2; else if(c.type === 'shield') playerSpeed /= 1.35; } }, c.type === 'rocket' ? 100 : 5000);
+                collectibles.splice(i, 1); break;
             }
+        }
 
-            playerX = 160; playerY = 260;
-            aiX = 160; aiY = 460;
-            obstacles = [];
-            collectibles = [];
-            difficulty = 1;
-            distanceTraveled = 0;
-            playerSpeed = 3.6;
-            aiSpeed = 3.85;
-            updateSpeedDisplay();
+        if(playerX >= FINISH_LINE) {
             raceActive = false;
-            if(animFrame) cancelAnimationFrame(animFrame);
-            drawStaticScene();
-
-            const wrapper = document.getElementById('race-wrapper');
-            wrapper.scrollLeft = 0;
+            const finishTime = (Date.now() - raceStartTime) / 1000;
+            let earned = Math.floor(80 + currentLevel * 30);
+            if (doubleCreditsNext) { earned *= 2; doubleCreditsNext = false; }
+            credits += earned;
+            saveToLeaderboard(finishTime);
+            checkAchievementsAfterRace(true);
+            document.getElementById('credits-ui').textContent = credits;
+            document.getElementById('win-time').innerHTML = `⏱️ Ваш час: <strong>${finishTime.toFixed(1)} секунд</strong>`;
+            document.getElementById('win-level').textContent = currentLevel;
+            document.getElementById('leaderboard-level').textContent = currentLevel;
+            if (currentLevel < MAX_LEVELS) currentLevel++;
+            savePlayerProgress();
+            renderLeaderboardForLevel();
+            showWinTab(0);
+            document.getElementById('win-screen').style.display = 'flex';
+            playSound('win');
+            cancelAnimationFrame(animFrame);
+            return;
         }
-
-        function generateStars() {
-            stars = [];
-            for(let i = 0; i < 620; i++) {
-                stars.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    size: Math.random() * 4.8 + 1.8,
-                    speed: Math.random() * 2.4 + 0.7
-                });
-            }
+        if(aiX >= FINISH_LINE) {
+            raceActive = false; raceCollided = true;
+            checkAchievementsAfterRace(false);
+            document.getElementById('lose-screen').style.display = 'flex';
+            cancelAnimationFrame(animFrame);
+            return;
         }
+        raceRender();
+        animFrame = requestAnimationFrame(raceLoop);
+    }
 
-        function drawStaticScene() {
-            ctx.fillStyle = '#030318';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = 'white';
-            stars.forEach(s => {
-                ctx.globalAlpha = 0.8;
-                ctx.fillRect(s.x, s.y, s.size, s.size);
-            });
-            ctx.globalAlpha = 1;
+    function prepareRaceScreen() {
+        canvas = document.getElementById('raceCanvas');
+        ctx = canvas.getContext('2d');
+        canvas.width = 5500; canvas.height = CANVAS_HEIGHT;
+        generateStars(); drawStaticScene();
 
-            ctx.strokeStyle = '#0ff';
-            ctx.setLineDash([6, 14]);
-            ctx.lineWidth = 6;
-            for(let i = 0; i < 13; i++) {
-                let y = 78 + i * LANE_HEIGHT;
-                ctx.beginPath();
-                ctx.moveTo(0, y);
-                ctx.lineTo(canvas.width, y);
-                ctx.stroke();
-            }
-            ctx.setLineDash([]);
-
-            ctx.lineWidth = 22;
-            ctx.strokeStyle = '#ffcc44';
-            ctx.beginPath();
-            ctx.moveTo(FINISH_LINE, 40);
-            ctx.lineTo(FINISH_LINE, canvas.height - 40);
-            ctx.stroke();
-            ctx.fillStyle = '#ffcc44';
-            ctx.font = "bold 48px 'Press Start 2P'";
-            ctx.fillText("ФІНІШ", FINISH_LINE - 190, 82);
-
-            drawPlanes();
-        }
-
-        function drawPlanes() {
-            ctx.font = "128px monospace";
-            ctx.fillStyle = "#88ddff";
-            ctx.shadowBlur = 40;
-            ctx.shadowColor = "#0ff";
-            ctx.fillText("🛸", playerX, playerY);
-            ctx.shadowBlur = 0;
-            
-            ctx.fillStyle = "#ff66cc";
-            ctx.fillText("✈️", aiX, aiY);
-        }
-
-        function updateStars() {
-            stars.forEach(s => { s.x -= s.speed; if(s.x < 0) s.x = canvas.width; });
-        }
-
-        function updateSpeedDisplay() {
-            document.getElementById('player-speed-ui').innerHTML = Math.round(playerSpeed * 29);
-            document.getElementById('ai-speed-ui').innerHTML = Math.round(aiSpeed * 29);
-            const progress = Math.min(100, Math.floor((playerX / FINISH_LINE) * 100));
-            document.getElementById('race-progress').innerHTML = progress;
-        }
-
-        function raceRender() {
-            if(!raceActive) return;
-            updateStars();
-            ctx.fillStyle = '#030318';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = 'white';
-            stars.forEach(s => { ctx.globalAlpha = 0.8; ctx.fillRect(s.x, s.y, s.size, s.size); });
-            ctx.globalAlpha = 1;
-
-            ctx.strokeStyle = '#0ff';
-            ctx.setLineDash([6,14]);
-            ctx.lineWidth = 6;
-            for(let i = 0; i < 13; i++) {
-                let y = 78 + i * LANE_HEIGHT;
-                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
-            }
-            ctx.setLineDash([]);
-
-            ctx.lineWidth = 22;
-            ctx.strokeStyle = '#ffcc44';
-            ctx.beginPath();
-            ctx.moveTo(FINISH_LINE, 40);
-            ctx.lineTo(FINISH_LINE, canvas.height - 40);
-            ctx.stroke();
-            ctx.fillStyle = '#ffcc44';
-            ctx.font = "bold 48px 'Press Start 2P'";
-            ctx.fillText("ФІНІШ", FINISH_LINE - 190, 82);
-
-            drawPlanes();
-
-            // ПЕРЕШКОДИ
-            ctx.font = "88px monospace";
-            obstacles.forEach(o => ctx.fillText(o.emoji, o.x, o.y));
-
-            // БОНУСИ (нові круті фішки)
-            ctx.font = "72px monospace";
-            collectibles.forEach(c => {
-                ctx.shadowBlur = 20;
-                ctx.shadowColor = "#ff0";
-                ctx.fillText(c.emoji, c.x, c.y);
-                ctx.shadowBlur = 0;
-            });
-
-            updateSpeedDisplay();
-
-            const wrapper = document.getElementById('race-wrapper');
-            wrapper.scrollLeft = Math.max(0, playerX - 720);
-        }
-
-        function raceLoop() {
-            if(!raceActive) return;
-            playerX += playerSpeed;
-            aiX += aiSpeed;
-            distanceTraveled = playerX;
-
-            // ЗРОСТАННЯ СКЛАДНОСТІ
-            difficulty = 1 + Math.floor(distanceTraveled / 1200);
-
-            if (keysPressed['ArrowUp'] || keysPressed['w'] || keysPressed['W']) playerY -= 11;
-            if (keysPressed['ArrowDown'] || keysPressed['s'] || keysPressed['S']) playerY += 11;
-            playerY = Math.max(MIN_Y, Math.min(MAX_Y, playerY));
-
-            // СПАВН ПЕРЕШКОД (складніше з часом)
-            if(Math.random() < 0.038 + difficulty * 0.008 && obstacles.length < 16) {
-                const laneIndex = Math.floor(Math.random() * 11) + 1;
-                const obstacleY = 78 + laneIndex * LANE_HEIGHT + 12;
-                obstacles.push({
-                    x: playerX + 720 + Math.random() * 1400,
-                    y: obstacleY,
-                    emoji: ['☄️','🌑','🪐','💥','⚡'][Math.floor(Math.random()*5)],
-                    vy: (Math.random() - 0.5) * 1.8   // деякі перешкоди рухаються вертикально
-                });
-            }
-
-            // СПАВН БОНУСІВ (крута нова фішка)
-            if(Math.random() < 0.018 && collectibles.length < 4) {
-                const laneIndex = Math.floor(Math.random() * 11) + 1;
-                const bonusY = 78 + laneIndex * LANE_HEIGHT + 12;
-                collectibles.push({
-                    x: playerX + 800 + Math.random() * 1600,
-                    y: bonusY,
-                    emoji: ['⚡','🔥','🌀','💎'][Math.floor(Math.random()*4)],
-                    type: ['boost','mega','rocket','shield'][Math.floor(Math.random()*4)]
-                });
-            }
-
-            obstacles = obstacles.filter(o => o.x > playerX - 220);
-            collectibles = collectibles.filter(c => c.x > playerX - 220);
-
-            // РУХ ПЕРЕШКОД (вертикальний дрейф)
-            obstacles.forEach(o => {
-                if(o.vy) o.y += o.vy;
-                if(o.y < MIN_Y + 30 || o.y > MAX_Y - 30) o.vy *= -1;
-            });
-
-            // ЗІТКНЕННЯ З ПЕРЕШКОДАМИ
-            for(let i = 0; i < obstacles.length; i++) {
-                const o = obstacles[i];
-                const sameLane = Math.abs(playerY - o.y) < COLLISION_TOLERANCE;
-                const horizontalHit = Math.abs(playerX + 45 - o.x) < 85;
-                if(sameLane && horizontalHit) {
-                    raceActive = false;
-                    document.getElementById('lose-screen').style.display = 'flex';
-                    cancelAnimationFrame(animFrame);
-                    return;
-                }
-            }
-
-            // ЗБІР БОНУСІВ
-            for(let i = collectibles.length - 1; i >= 0; i--) {
-                const c = collectibles[i];
-                const sameLane = Math.abs(playerY - c.y) < COLLISION_TOLERANCE;
-                const horizontalHit = Math.abs(playerX + 45 - c.x) < 85;
-                if(sameLane && horizontalHit) {
-                    // Активація бонусу
-                    if(c.type === 'boost') playerSpeed *= 1.6;
-                    else if(c.type === 'mega') playerSpeed *= 2.2;
-                    else if(c.type === 'rocket') playerX = Math.min(FINISH_LINE - 80, playerX + 280);
-                    else if(c.type === 'shield') playerSpeed *= 1.35;
-                    
-                    setTimeout(() => {
-                        if(raceActive) {
-                            if(c.type === 'boost') playerSpeed /= 1.6;
-                            else if(c.type === 'mega') playerSpeed /= 2.2;
-                            else if(c.type === 'shield') playerSpeed /= 1.35;
-                        }
-                    }, c.type === 'rocket' ? 100 : 5000);
-                    
-                    collectibles.splice(i, 1);
-                    break;
-                }
-            }
-
-            if(playerX >= FINISH_LINE) { 
-                raceActive = false; 
-                document.getElementById('win-screen').style.display = 'flex'; 
-                cancelAnimationFrame(animFrame); 
-                return; 
-            }
-            if(aiX >= FINISH_LINE) { 
-                raceActive = false; 
-                document.getElementById('lose-screen').style.display = 'flex'; 
-                cancelAnimationFrame(animFrame); 
-                return; 
-            }
-
-            raceRender();
-            animFrame = requestAnimationFrame(raceLoop);
-        }
-
-        function startRaceAction() {
-            if(raceActive) return;
-            playerX = 160; playerY = 260; aiX = 160; 
-            obstacles = [];
-            collectibles = [];
-            difficulty = 1;
-            distanceTraveled = 0;
-            playerSpeed = 3.6; aiSpeed = 3.85;
-            raceActive = true;
-            animFrame = requestAnimationFrame(raceLoop);
-        }
-
-        function activatePowerInRace(idx) {
-            if(!raceActive || idx >= powers.length) return;
-            const power = powers[idx];
-            const btns = document.querySelectorAll('#race-powers-buttons .power-btn');
-            if(btns[idx]) btns[idx].disabled = true;
-
-            if(power.effect === 'boost') { playerSpeed *= 1.5; setTimeout(() => { if(raceActive) playerSpeed /= 1.5; }, 6000); }
-            else if(power.effect === 'shield') { playerSpeed *= 1.3; setTimeout(() => { if(raceActive) playerSpeed /= 1.3; }, 7000); }
-            else if(power.effect === 'slow') { aiSpeed *= 0.6; setTimeout(() => { if(raceActive) aiSpeed /= 0.6; }, 6500); }
-            else if(power.effect === 'mega') { playerSpeed *= 2; setTimeout(() => { if(raceActive) playerSpeed /= 2; }, 5500); }
-            else if(power.effect === 'rocket') { playerX = Math.min(FINISH_LINE - 50, playerX + 240); }
-
-            powers.splice(idx, 1);
-            const container = document.getElementById('race-powers-buttons');
-            container.innerHTML = '<div style="width:100%; text-align:center; font-size:1.1rem;">✨ СУПЕРСИЛИ ✨</div>';
+        const container = document.getElementById('race-powers-buttons');
+        container.innerHTML = '<div style="width:100%; text-align:center; font-size:1.1rem;">✨ СУПЕРСИЛИ (цифри 1-5) ✨</div>';
+        if (extraPowersOnStart && powers.length < 5) powers.push({name:'БОНУСНА МЕГА-СИЛА', effect:'mega'});
+        if(powers.length === 0) container.innerHTML += '<div style="color:#ffaa44;">Немає сил — чиста майстерність!</div>';
+        else {
             powers.forEach((p,i) => {
                 const btn = document.createElement('button');
                 btn.className = 'power-btn';
-                btn.innerText = `${p.name} (${p.desc})`;
+                btn.innerText = `${p.name} (${p.desc || ''})`;
                 btn.onclick = () => activatePowerInRace(i);
                 container.appendChild(btn);
             });
         }
 
-        function fullRestart() {
-            if(animFrame) cancelAnimationFrame(animFrame);
-            raceActive = false;
-            assembledCount = 0;
-            powers = [];
-            currentQuestionIdx = 0;
-            obstacles = [];
-            collectibles = [];
-            document.getElementById('assembly-status').innerHTML = '⚙️ Деталей: 0/5';
-            
-            const slots = document.querySelectorAll('.slot');
-            slots.forEach(slot => {
-                slot.classList.remove('filled');
-                const r = slot.dataset.required;
-                if(r==='body') slot.innerHTML = '🛩️ КОРПУС';
-                else if(r==='wings') slot.innerHTML = '🪽 КРИЛА';
-                else if(r==='tail') slot.innerHTML = '⬆️ ХВОСТ';
-                else if(r==='engines') slot.innerHTML = '🔥 ДВИГУНИ';
-                else if(r==='cockpit') slot.innerHTML = '🪟 КАБІНА';
-            });
+        playerX = 160; playerY = 260; aiX = 160; aiY = 460;
+        obstacles = []; collectibles = []; difficulty = 1; distanceTraveled = 0;
+        playerSpeed = 3.6 * playerSpeedBaseBonus;
+        aiSpeed = 3.85 + (currentLevel * 0.3);
+        totalBonusesCollected = 0; raceCollided = false;
+        updateSpeedDisplay(); raceActive = false;
+        if(animFrame) cancelAnimationFrame(animFrame);
+        drawStaticScene();
+        document.getElementById('race-level-ui').textContent = currentLevel;
+        document.getElementById('race-wrapper').scrollLeft = 0;
+    }
 
-            const inv = document.getElementById('inventory');
-            inv.innerHTML = '';
-            partsData.forEach(part => {
-                const div = document.createElement('div');
-                div.className = 'part';
-                div.setAttribute('data-part', part.id);
-                div.setAttribute('draggable', 'true');
-                div.innerHTML = `<div style="font-size:3.6rem;">${part.emoji}</div><div style="margin-top:12px;">${part.name}</div>`;
-                inv.appendChild(div);
-            });
-            initDragAndDrop();
-            updateAssembledPreview();
+    function startRaceAction() {
+        if(raceActive) return;
+        raceStartTime = Date.now();
+        raceActive = true;
+        animFrame = requestAnimationFrame(raceLoop);
+    }
 
-            document.getElementById('win-screen').style.display = 'none';
-            document.getElementById('lose-screen').style.display = 'none';
-            switchScreen('start');
-        }
-
-        function switchScreen(id) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById(id + '-screen').classList.add('active');
-            if(id === 'assembly') {
-                refreshInventoryAndDrag();
-                updateAssembledPreview();
-            }
-        }
-
-        document.getElementById('start-game-btn').onclick = () => { fullRestart(); switchScreen('assembly'); };
-        document.getElementById('check-assembly-btn').onclick = checkAssemblyAndProceed;
-        document.getElementById('start-race-btn').onclick = startRaceAction;
-        document.getElementById('reset-full-btn').onclick = fullRestart;
-        document.getElementById('win-restart').onclick = fullRestart;
-        document.getElementById('lose-restart').onclick = fullRestart;
-
-        document.addEventListener('keydown', e => { 
-            keysPressed[e.key] = true; 
-            if(raceActive && e.key>='1' && e.key<='5') activatePowerInRace(parseInt(e.key)-1); 
+    function activatePowerInRace(idx) {
+        if(!raceActive || idx >= powers.length) return;
+        const power = powers[idx];
+        const btns = document.querySelectorAll('#race-powers-buttons .power-btn');
+        if(btns[idx]) btns[idx].disabled = true;
+        if(power.effect === 'boost') { playerSpeed *= 1.5; setTimeout(() => { if(raceActive) playerSpeed /= 1.5; }, 6000); }
+        else if(power.effect === 'shield') { playerSpeed *= 1.3; setTimeout(() => { if(raceActive) playerSpeed /= 1.3; }, 7000); }
+        else if(power.effect === 'slow') { aiSpeed *= 0.6; setTimeout(() => { if(raceActive) aiSpeed /= 0.6; }, 6500); }
+        else if(power.effect === 'mega') { playerSpeed *= 2; setTimeout(() => { if(raceActive) playerSpeed /= 2; }, 5500); }
+        else if(power.effect === 'rocket') { playerX = Math.min(FINISH_LINE - 50, playerX + 240); }
+        powers.splice(idx, 1);
+        const container = document.getElementById('race-powers-buttons');
+        container.innerHTML = '<div style="width:100%; text-align:center; font-size:1.1rem;">✨ СУПЕРСИЛИ ✨</div>';
+        powers.forEach((p,i) => {
+            const btn = document.createElement('button');
+            btn.className = 'power-btn';
+            btn.innerText = `${p.name} (${p.desc || ''})`;
+            btn.onclick = () => activatePowerInRace(i);
+            container.appendChild(btn);
         });
-        document.addEventListener('keyup', e => { keysPressed[e.key] = false; });
+    }
 
-        const initInventory = () => {
-            const inv = document.getElementById('inventory');
-            partsData.forEach(part => {
-                const div = document.createElement('div');
-                div.className = 'part';
-                div.setAttribute('data-part', part.id);
-                div.setAttribute('draggable', 'true');
-                div.innerHTML = `<div style="font-size:3.6rem;">${part.emoji}</div><div style="margin-top:12px;">${part.name}</div>`;
-                inv.appendChild(div);
-            });
-            initDragAndDrop();
+    // ====================== ЕКРАНИ ======================
+    function switchScreen(id) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(id + '-screen').classList.add('active');
+        if(id === 'assembly') {
+            assembledCount = 0; nextSlotIndex = 0;
+            refreshInventoryAndDrag();
             updateAssembledPreview();
-        };
-        initInventory();
-        
+            highlightNextSlot();
+            updateAssemblyStatus();
+            drawShipPreview();
+        }
+    }
+
+    function fullRestart() {
+        if(animFrame) cancelAnimationFrame(animFrame);
+        raceActive = false;
+        assembledCount = 0; nextSlotIndex = 0; powers = []; currentQuestionIdx = 0; correctAnswersThisQuiz = 0;
+        obstacles = []; collectibles = []; raceCollided = false; totalBonusesCollected = 0;
+        const slots = document.querySelectorAll('.slot');
+        slots.forEach(slot => {
+            slot.classList.remove('filled');
+            const r = slot.dataset.required;
+            if(r==='body') slot.innerHTML = '🛩️ КОРПУС';
+            else if(r==='wings') slot.innerHTML = '🪽 КРИЛА';
+            else if(r==='tail') slot.innerHTML = '⬆️ ХВОСТ';
+            else if(r==='engines') slot.innerHTML = '🔥 ДВИГУНИ';
+            else if(r==='cockpit') slot.innerHTML = '🪟 КАБІНА';
+        });
         document.getElementById('win-screen').style.display = 'none';
         document.getElementById('lose-screen').style.display = 'none';
-    })();
+        savePlayerProgress();
+        switchScreen('start');
+    }
+
+    function showAchievements() { document.getElementById('win-screen').style.display = 'flex'; showWinTab(1); }
+    function showShop() { document.getElementById('win-screen').style.display = 'flex'; showWinTab(2); }
+
+    window.showWinTab = function(n) {
+        document.querySelectorAll('#win-screen > div[id^="win-tab"]').forEach(d => d.style.display = 'none');
+        document.getElementById('win-tab-' + n).style.display = 'block';
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', false));
+        document.querySelectorAll('.tab-btn')[n].classList.add('active');
+        if (n === 0) renderLeaderboardForLevel();
+        if (n === 1) renderAchievements(document.getElementById('achievements-list'));
+        if (n === 2) renderShop();
+    };
+
+    // ====================== ІНІЦІАЛІЗАЦІЯ ======================
+    function initInventory() {
+        const inv = document.getElementById('inventory');
+        partsData.forEach(part => {
+            const div = document.createElement('div');
+            div.className = 'part';
+            div.setAttribute('data-part', part.id);
+            div.setAttribute('draggable', 'true');
+            div.innerHTML = `<div style="font-size:3.6rem;">${part.emoji}</div><div style="margin-top:12px;">${part.name}</div>`;
+            inv.appendChild(div);
+        });
+        initDragAndDrop();
+    }
+
+    document.getElementById('start-game-btn').onclick = () => {
+        const inputVal = document.getElementById('player-name-input').value.trim();
+        if (!inputVal) { alert("❌ Введи свій нікнейм!"); return; }
+        if (playerName !== inputVal) {
+            playerName = inputVal;
+            loadPlayerProgress(playerName);
+        }
+        document.getElementById('player-name-ui').textContent = playerName;
+        document.getElementById('credits-ui').textContent = credits;
+        document.getElementById('level-ui').textContent = currentLevel;
+        document.getElementById('top-bar').style.display = 'flex';
+        switchScreen('assembly');
+        initAudio();
+        if (audioElements.bg) audioElements.bg.play();
+    };
+
+    document.getElementById('check-assembly-btn').onclick = checkAssemblyAndProceed;
+    document.getElementById('start-race-btn').onclick = startRaceAction;
+    document.getElementById('reset-full-btn').onclick = fullRestart;
+
+    document.addEventListener('keydown', e => { keysPressed[e.key] = true; if(raceActive && e.key>='1' && e.key<='5') activatePowerInRace(parseInt(e.key)-1); });
+    document.addEventListener('keyup', e => { keysPressed[e.key] = false; });
+
+    // ЗАПУСК
+    loadAllLeaderboards();
+    initInventory();
+    document.getElementById('win-screen').style.display = 'none';
+    document.getElementById('lose-screen').style.display = 'none';
+
+    console.log('%c✅ КОСМОКВЕСТ 2.0 З РІВНЯМИ 1-5 + ОКРЕМІ ЛІДЕРБОРДИ ГОТОВИЙ!', 'color:#0ff;font-size:18px');
 </script>
 </body>
 </html>
